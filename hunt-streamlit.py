@@ -78,7 +78,7 @@ def get_registration_country(domain):
     try:
         w = whois.whois(domain)
         country = w.get('country', 'Country information not available')
-        return country if country else 'Country information not available'
+        return country if country else 'NA'
     except Exception as e:
         st.error(f"Error retrieving WHOIS information for {domain}: {e}")
         return 'Error'
@@ -97,10 +97,10 @@ def process_website(website):
     return None
 
 # Streamlit app
-st.title('Website Information Finder')
+st.title('Email Extractor from Google based on the keyword search')
 
-keyword = st.text_input("Enter the search keyword:", "Top bio degradable paper cup distributors in Europe")
-num_results = st.slider("Number of search results:", 10, 5000, 500)
+keyword = st.text_input("Enter the search keyword:", "Top IT companies in the world")
+num_results = st.slider("Number of search results:", 1, 5, 50)
 
 if st.button('Search'):
     if keyword:
