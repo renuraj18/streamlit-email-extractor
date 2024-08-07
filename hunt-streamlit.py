@@ -6,7 +6,6 @@ import re
 import whois
 import concurrent.futures
 import pandas as pd
-import io
 
 def search_keyword(keyword, num_results=5000, ignore_websites=None):
     if ignore_websites is None:
@@ -123,13 +122,13 @@ if st.button('Search'):
                             if website_info:
                                 website, country, emails = website_info
                                 if emails == "Nil":
-                                    results.append([idx, website, country, "Nil"])
+                                    results.append([website, country, "Nil"])
                                 else:
                                     for email in emails:
-                                        results.append([idx, website, country, email])
+                                        results.append([website, country, email])
                         except Exception as e:
                             st.error(f"An error occurred for website {website}: {e}")
-                            results.append([idx, website, "Error", "Error"])
+                            results.append([website, "Error", "Error"])
                         
                         # Update progress bar
                         progress_bar.progress(int((idx / total_websites) * 100))
@@ -138,7 +137,7 @@ if st.button('Search'):
                 progress_bar.empty()
                 
                 # Convert results to DataFrame and display as a table
-                df = pd.DataFrame(results, columns=["Serial No.", "Website", "Country", "Email"])
+                df = pd.DataFrame(results, columns=["Website", "Country", "Email"])
                 st.dataframe(df)
                 
                 # Provide download options
@@ -160,3 +159,7 @@ if st.button('Search'):
                 )
             else:
                 st.write("No websites found or error occurred.")
+# Add a footer with copyright information
+st.markdown("---")
+st.markdown("© 2024 Email Extractor. All rights reserved.")
+st.markdown("Contact: [renuraj18@gmail.com](mailto:renuraj18@gmail.com)")
