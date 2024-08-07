@@ -99,7 +99,7 @@ def process_website(website):
 st.title('Email Extractor from Google based on the keyword search')
 
 keyword = st.text_input("Enter the search keyword:", "Top IT companies in the world")
-num_results = st.slider("Number of search results:", 1, 5, 50)
+num_results = st.slider("Number of search results:", 1, 50, 500)
 
 if st.button('Search'):
     if keyword:
